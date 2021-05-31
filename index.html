@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="Description"
+			content="Author: Chidiebere Onyegbuchulem, 
+  Search Github profiles using their usernames"
+		/>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<title>Search Github profiles</title>
+	</head>
+	<body id="search-page">
+		<header class="header">
+			<img
+				src="./images/github-black.svg"
+				alt="Github black octocat logo"
+				width="48"
+				height="48"
+			/>
+		</header>
+		<main class="main">
+			<div class="main__container">
+				<h1 class="main__title">Search GitHub Profile</h1>
+				<div class="error">
+					<div class="error__container">
+						<div class="error__message"></div>
+						<button  class="error__button" type="button" aria-label="Dismiss this message"> 
+							<span class="error__button--close">&#10005</span>
+						</button>
+					</div>
+				</div>
+				<form
+					class="form"
+					role="search"
+					aria-label="Search for a GitHub profile"
+				>
+					<label for="username" class="form__label">Username </label>
+					<input
+						type="text"
+						name="username"
+						id="username"
+						class="form__input"
+					/>
+					<button type="submit" value="Search" class=" form__btn btn">
+						Search
+					</button>
+				</form>
+			</div>
+		</main>
+		<footer class="footer">
+			<div class="footer__container">
+				<a href="#">Terms</a>
+				<a href="#">Privacy</a>
+				<a href="#">Security</a>
+				<a href="#" class="footer__link">Contact GitHub</a>
+			</div>
+		</footer>
+		<script type="module" src="js/search.js"></script>
+	</body>
+</html>
