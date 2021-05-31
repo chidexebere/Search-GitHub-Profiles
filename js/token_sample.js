@@ -1,0 +1,3 @@
+const TOKEN = 'ENTER YOUR GITHUB PERSONAL ACCESS TOKEN HERE';
+
+export default TOKEN;
