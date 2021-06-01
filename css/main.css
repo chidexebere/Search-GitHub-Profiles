@@ -67,6 +67,7 @@ body {
 	line-height: 1.5;
 	color: var(--color-text-primary);
 	background-color: var(--color-bg-canvas);
+	word-wrap: break-word;
 }
 
 a {
@@ -191,8 +192,8 @@ input:focus {
 }
 
 .btn {
-	position: relative;
-	display: inline-block;
+	/* position: relative;
+	display: inline-block; */
 	padding: 5px 16px;
 	font-size: 14px;
 	font-weight: 500;
@@ -763,7 +764,6 @@ svg .github-icon:active {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
-	width: 16.66667%;
 }
 
 .icon-star,
@@ -832,4 +832,103 @@ svg .github-icon:active {
 }
 #profile-page .footer:hover {
 	opacity: 1;
+}
+
+details > summary {
+	list-style: none;
+}
+details > summary::-webkit-details-marker {
+	display: none;
+}
+
+.profile__container {
+	display: none;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (min-width: 768px) {
+	#profile-page .main {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		padding: 0 1.6rem;
+	}
+
+	.profile__cover {
+		position: relative;
+		display: flex;
+		top: -4rem;
+	}
+
+	.profile__container {
+		position: sticky;
+		top: 0;
+		width: 100%;
+		z-index: 1;
+		display: flex;
+		margin-top: 4rem;
+		border-color: var(--color-border-secondary);
+		border-bottom: 1px solid var(--color-border-primary);
+	}
+
+	.profile__details {
+		position: relative;
+		z-index: 2;
+		flex-basis: 25%;
+		padding: 0 0.8rem;
+	}
+
+	.repo__details {
+		position: relative;
+		z-index: 2;
+		flex-basis: 75%;
+		padding: 0 0.8rem;
+	}
+
+	.profile__personalDetails {
+		display: block;
+	}
+
+	.profile__img {
+		width: auto;
+		margin-right: 0;
+	}
+
+	.repo-top {
+		display: flex;
+		align-items: flex-start;
+	}
+
+	.repo-top__btn {
+		order: 2;
+		width: auto;
+		margin-left: 1.6rem;
+	}
+
+	.repo-top__form {
+		margin-right: 1.6rem;
+	}
+
+	.repo-top__search {
+		order: 1;
+		flex: auto;
+	}
+}
+
+@media screen and (min-width: 1012px) {
+	#profile-page .main {
+		padding: 0 2.4rem;
+	}
+	.repo-top__search {
+		flex-direction: row;
+	}
+
+	.repo-top__form {
+		width: 100%;
+	}
+
+	.repo-top__btn {
+		margin-bottom: 0;
+	}
 }
