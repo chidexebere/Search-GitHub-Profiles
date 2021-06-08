@@ -47,16 +47,6 @@ const getUserDataPofile = async (username) => {
               resourcePath
               description
               stargazerCount
-              repositoryTopics (first: 5){
-                edges {
-                  node {
-                    url
-                    topic {
-                      name
-                    }
-                  }
-                }
-              }
               primaryLanguage {
                 name
                 color
