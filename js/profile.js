@@ -3,7 +3,7 @@ const userProfileData = sessionStorage.getItem('user-profile');
 const searchWrapper = document.querySelector('.navbar__inputWrapper');
 const searchInput = document.querySelector('.navbar__input');
 const keySlashIcon = document.querySelector('.key-slash');
-const bottomNav = document.querySelector('.navbar__bottom');
+const searchAreaNav = document.querySelector('.search-area');
 
 const addSearchFocus = () => {
 	keySlashIcon.style.display = 'none';
@@ -18,7 +18,7 @@ const removeSearchFocus = () => {
 };
 
 const toggleNav = () => {
-	bottomNav.classList.toggle('open');
+	searchAreaNav.classList.toggle('open');
 };
 
 const openTab = (evt, tab) => {
@@ -76,30 +76,20 @@ const format = (date) => {
  * @return {Element}
  */
 const generateSvgWithPath = (pathString, className, options = {}) => {
-	let svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-	svg.classList.add(`icon`, className);
+	const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+	svg.classList.add('icon', className);
 	svg.setAttribute('viewBox', options.viewBox ? options.viewBox : '0 0 16 16');
 	svg.setAttribute('version', '1.1');
 	svg.setAttribute('width', options.width ? options.width : '16');
 	svg.setAttribute('height', options.height ? options.height : '16');
-	// svg.setAttribute('aria-hidden', 'true');
+	svg.setAttribute('aria-hidden', 'true');
 
-	let path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+	const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 	path.setAttribute('fill-rule', 'evenodd');
 	path.setAttribute('d', pathString);
 	svg.appendChild(path);
 	return svg;
 };
-
-const starIcon = generateSvgWithPath(
-	'M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25zm0 2.445L6.615 5.5a.75.75 0 01-.564.41l-3.097.45 2.24 2.184a.75.75 0 01.216.664l-.528 3.084 2.769-1.456a.75.75 0 01.698 0l2.77 1.456-.53-3.084a.75.75 0 01.216-.664l2.24-2.183-3.096-.45a.75.75 0 01-.564-.41L8 2.694v.001z',
-	`icon-star`
-);
-
-const forkIcon = generateSvgWithPath(
-	'M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 ,011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z',
-	`icon-repo-forked`
-);
 
 const renderRepository = (repository) => {
 	const title = document.createElement('h3');
@@ -108,18 +98,16 @@ const renderRepository = (repository) => {
 	const link = document.createElement('a');
 	link.classList.add('repo__title-link');
 	link.setAttribute('href', `https://github.com${repository.resourcePath}`);
-	// link.setAttribute('target', '_blank');
-	// link.setAttribute('rel', 'noopener noreferrer');
 	link.textContent = repository.name;
 
 	title.append(link);
 
+	const descriptionCover = document.createElement('div');
+	descriptionCover.classList.add('repo__description-cover');
 	const description = document.createElement('p');
 	description.classList.add('repo__description');
 	description.textContent = repository.description;
-
-	// Render repository topics
-	// const topics = renderTopics(repository.repositoryTopics);
+	descriptionCover.append(description);
 
 	// Repository Language
 	const language = document.createElement('span');
@@ -142,18 +130,25 @@ const renderRepository = (repository) => {
 	starCount.classList.add('repo__star-count');
 	starCount.setAttribute('href', `#`);
 
-	const STARCOUNT = document.createTextNode(repository.stargazerCount);
-
-	starCount.appendChild(starIcon);
-	starCount.appendChild(STARCOUNT);
+	starCount.append(
+		generateSvgWithPath(
+			'M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25zm0 2.445L6.615 5.5a.75.75 0 01-.564.41l-3.097.45 2.24 2.184a.75.75 0 01.216.664l-.528 3.084 2.769-1.456a.75.75 0 01.698 0l2.77 1.456-.53-3.084a.75.75 0 01.216-.664l2.24-2.183-3.096-.45a.75.75 0 01-.564-.41L8 2.694v.001z',
+			'icon-star'
+		),
+		repository.stargazerCount
+	);
 
 	// Fork counts
 	const forkCount = document.createElement('a');
-	forkCount.classList.add('repo__star-fork');
+	forkCount.classList.add('repo__fork-count');
 
-	const FORKCOUNT = document.createTextNode(repository.forkCount);
-	forkCount.append(forkIcon);
-	forkCount.append(FORKCOUNT);
+	forkCount.append(
+		generateSvgWithPath(
+			'M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 ,011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z',
+			'icon-repo-forked'
+		),
+		repository.forkCount
+	);
 
 	// Repository time
 	const timeUpdated = document.createElement('time');
@@ -179,21 +174,20 @@ const renderRepository = (repository) => {
 
 	const filteredItemDetails = document.createElement('div');
 	filteredItemDetails.classList.add('repo__filterItem-details');
-	filteredItemDetails.append(title, description, repoDetails);
-	// if (topics) {
-	// 	div.append(topics);
-	// }
-	// div.append(repoDetails);
+	filteredItemDetails.append(title, descriptionCover, repoDetails);
 
 	const starRepo = document.createElement('div');
 	starRepo.classList.add('repo__rating');
 
 	const starBtn = document.createElement('button');
 	starBtn.classList.add('btn', 'btn-sm');
-	starBtn.appendChild(starIcon);
-	const STAR = document.createTextNode('Star');
-	// starBtn.innerHTML = `${starIcon} Star`;
-	starBtn.appendChild(STAR);
+	starBtn.append(
+		generateSvgWithPath(
+			'M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25zm0 2.445L6.615 5.5a.75.75 0 01-.564.41l-3.097.45 2.24 2.184a.75.75 0 01.216.664l-.528 3.084 2.769-1.456a.75.75 0 01.698 0l2.77 1.456-.53-3.084a.75.75 0 01.216-.664l2.24-2.183-3.096-.45a.75.75 0 01-.564-.41L8 2.694v.001z',
+			'icon-star'
+		),
+		'Star'
+	);
 
 	starRepo.append(starBtn);
 
@@ -206,8 +200,25 @@ const renderRepository = (repository) => {
 
 const populateUserProfilePage = (data) => {
 	const avatarImage = document.querySelector('.avatar');
-	avatarImage.setAttribute('src', data.avatarUrl);
-	avatarImage.setAttribute('alt', `@${data.login}`);
+	const dropdownAvatar = document.querySelector('#dropdown-avatar');
+	const profileImage = document.querySelector('.profile__img');
+
+	const displayAvatar = (AVATAR) => {
+		AVATAR.setAttribute('src', data.avatarUrl);
+		AVATAR.setAttribute('alt', `@${data.login}`);
+	};
+
+	// Displays avatar in nav in mobile view
+	displayAvatar(avatarImage);
+
+	// Displays avatar in top nav in tablet and desktop view
+	displayAvatar(dropdownAvatar);
+
+	// Displays profile picture in tablet and desktop view
+	displayAvatar(profileImage);
+
+	const userProfileName = document.querySelector('.user-profile-name');
+	userProfileName.textContent = data.login;
 
 	const userName = document.querySelector('.username');
 	userName.textContent = data.login;
@@ -217,25 +228,45 @@ const populateUserProfilePage = (data) => {
 	const profileUserFullName = document.querySelector('.profile__username');
 	profileUserFullName.textContent = data.login;
 
-	const profileImage = document.querySelector('.profile__img');
-	profileImage.setAttribute('src', data.avatarUrl);
-	profileImage.setAttribute('alt', `${data.name} profile image`);
-
+	const userEmojiM = document.querySelector('.user-emoji--mobile');
+	const defaultEmojiM = document.querySelector('.default-emoji--mobile');
+	const statusMsgM = document.querySelector('.user-msg--mobile');
+	const userEmojiNav = document.querySelector('.user-emoji--nav');
+	const defaultEmojiNav = document.querySelector('.default-emoji--nav');
+	const statusMsgNav = document.querySelector('.user-msg--nav');
 	const userEmoji = document.querySelector('.user-emoji');
-	const smileyEmoji = document.querySelector('.smiley');
+	const defaultEmoji = document.querySelector('.default-emoji');
+	const statusMsg = document.querySelector('.user-msg');
 
-	if (data.status === null || data.status.emojiHTML === null) {
-		smileyEmoji.style.display = 'block';
-		userEmoji.style.display = 'none';
-	} else {
-		userEmoji.innerHTML = data.status.emojiHTML;
-	}
-	const statusMsg = document.querySelector('.profile__status-msg');
-	if (data.status === null || data.status.message === null) {
-		statusMsg.innerHTML = 'Set status';
-	} else {
-		statusMsg.innerHTML = data.status.message;
-	}
+	const displayProfileStatus = (USEREMOJI, DEFAULTEMOJI, STATUSMSG) => {
+		if (data.status === null) {
+			USEREMOJI.style.display = 'none';
+			STATUSMSG.innerHTML = 'Set status';
+		} else {
+			DEFAULTEMOJI.style.display = 'none';
+			USEREMOJI.innerHTML = data.status.emojiHTML;
+			STATUSMSG.innerHTML = data.status.message;
+		}
+	};
+
+	// Displays profile status in mobile view
+	displayProfileStatus(userEmojiM, defaultEmojiM, statusMsgM);
+	// Displays profile status in top nav in tablet and desktop view
+	displayProfileStatus(userEmojiNav, defaultEmojiNav, statusMsgNav);
+	// Displays profile status in tablet and desktop view
+	displayProfileStatus(userEmoji, defaultEmoji, statusMsg);
+
+	const profileStatus = document.querySelector('#profile__status');
+
+	// Toggle profile status in tablet and desktop view
+	const showStatusMsg = () => {
+		statusMsg.style.display = 'block';
+	};
+	const hideStatusMsg = () => {
+		statusMsg.style.display = 'none';
+	};
+	profileStatus.addEventListener('mouseover', showStatusMsg);
+	profileStatus.addEventListener('mouseout', hideStatusMsg);
 
 	const userBio = document.querySelector('.profile__user-bio');
 	userBio.textContent = data.bio;
@@ -246,18 +277,12 @@ const populateUserProfilePage = (data) => {
 	const filteredRepo = document.querySelector('.repo__filterNumber');
 	filteredRepo.textContent = data.repositories.edges.length;
 
-	// const repoCount = document.querySelector('#repo-count');
-	// repoCount.textContent = data.repositories.totalCount;
-
 	const repositories = data.repositories.edges;
 
 	const fragment = document.createDocumentFragment();
 	repositories.forEach(({ node }) => {
 		fragment.appendChild(renderRepository(node));
 	});
-
-	// const filteredList = document.createElement('ul');
-	// filteredList.classList.add('repo__filterList');
 
 	const filteredList = document.querySelector('.repo__filterList');
 	filteredList.append(fragment);

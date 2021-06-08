@@ -17,8 +17,8 @@
 		<header class="header">
 			<!-- Navbar begin-->
 			<nav class="navbar" id="main-nav">
-				<div class="navbar__top">
-					<div class="navbar__item" onclick="toggleNav()">
+				<div class="navbar__container">
+					<div class="navbar__item hamburger" onclick="toggleNav()">
 						<button>
 							<svg
 								class="icon three-bars"
@@ -35,7 +35,7 @@
 						</button>
 					</div>
 
-					<div class="navbar__item">
+					<div class="navbar__item logo">
 						<a href="#">
 							<svg
 								class="icon github-icon"
@@ -52,7 +52,63 @@
 						</a>
 					</div>
 
-					<div class="nav-item notifications">
+					<div class="navbar__item search-area" id="search-area">
+						<div class="navbar__search" id="search-box">
+							<form role="search" aria-label="Search">
+								<label for="search" class="navbar__inputWrapper">
+									<input
+										class="navbar__input"
+										name="search"
+										placeholder="Search or jump to ..."
+										onfocus="addSearchFocus()"
+										onblur="removeSearchFocus()"
+									/>
+									<img
+										src="https://github.githubassets.com/images/search-key-slash.svg"
+										alt=""
+										class="icon key-slash"
+									/>
+								</label>
+							</form>
+						</div>
+
+						<nav class="navbar__base">
+							<a href="#" class="navbar__base-link" id="dashboard">Dashboard</a>
+							<a href="#" class="navbar__base-link" id="pull-request"
+								>Pull request</a
+							>
+							<a href="#" class="navbar__base-link" id="pulls">Pulls</a>
+							<a href="#" class="navbar__base-link" id="issues">Issues</a>
+							<a href="#" class="navbar__base-link" id="trending">Trending</a>
+							<a href="#" class="navbar__base-link" id="explore">Explore</a>
+							<a href="#" class="navbar__base-link" id="codespaces"
+								>Codespaces</a
+							>
+							<a href="#" class="navbar__base-link" id="sponsors">Sponsors</a>
+							<a href="#" class="navbar__base-link" id="settings">Settings</a>
+							<a href="#" class="navbar__base-link" id="avatar">
+								<img class="avatar avatar__img" width="20" height="20" />
+								<span class="username"></span>
+							</a>
+							<a href="#" class="navbar__base-link" id="sign-out">
+								<svg
+									class="icon sign-out-icon"
+									viewBox="0 0 16 16"
+									width="16"
+									height="16"
+									aria-hidden="true"
+								>
+									<path
+										fill-rule="evenodd"
+										d="M2 2.75C2 1.784 2.784 1 3.75 1h2.5a.75.75 0 010 1.5h-2.5a.25.25 0 00-.25.25v10.5c0 .138.112.25.25.25h2.5a.75.75 0 010 1.5h-2.5A1.75 1.75 0 012 13.25V2.75zm10.44 4.5H6.75a.75.75 0 000 1.5h5.69l-1.97 1.97a.75.75 0 101.06 1.06l3.25-3.25a.75.75 0 000-1.06l-3.25-3.25a.75.75 0 10-1.06 1.06l1.97 1.97z"
+									></path>
+								</svg>
+								Sign Out
+							</a>
+						</nav>
+					</div>
+
+					<div class="navbar__item notifications">
 						<a href="#" class="notifications__link">
 							<span class="mail-status--unread"></span>
 							<svg
@@ -76,161 +132,165 @@
 							<span class="unread-icon"></span>
 						</a>
 					</div>
-				</div>
 
-				<div class="navbar__bottom" id="search-area">
-					<div class="navbar__search" id="search-box">
-						<form role="search" aria-label="Search">
-							<label for="search" class="navbar__inputWrapper">
-								<input
-									class="navbar__input"
-									name="search"
-									placeholder="Search or jump to ..."
-									onfocus="addSearchFocus()"
-									onblur="removeSearchFocus()"
-								/>
-								<img
-									src="https://github.githubassets.com/images/search-key-slash.svg"
-									alt=""
-									class="icon key-slash"
-								/>
-							</label>
-						</form>
-					</div>
-
-					<nav class="navbar__base">
-						<a href="#" class="navbar__base-link">Dashboard</a>
-						<a href="#" class="navbar__base-link">Pull request</a>
-						<a href="#" class="navbar__base-link">Issues</a>
-						<a href="#" class="navbar__base-link">Trending</a>
-						<a href="#" class="navbar__base-link">Explore</a>
-						<a href="#" class="navbar__base-link">Codespaces</a>
-						<a href="#" class="navbar__base-link">Sponsors</a>
-						<a href="#" class="navbar__base-link">Settings</a>
-						<a href="#" class="navbar__base-link">
-							<img class="avatar avatar__img" width="20" height="20" />
-							<span class="username"></span>
-						</a>
-						<a href="#" class="navbar__base-link">
-							<svg
-								class="icon sign-out-icon"
-								viewBox="0 0 16 16"
-								width="16"
-								height="16"
-								aria-hidden="true"
-							>
-								<path
-									fill-rule="evenodd"
-									d="M2 2.75C2 1.784 2.784 1 3.75 1h2.5a.75.75 0 010 1.5h-2.5a.25.25 0 00-.25.25v10.5c0 .138.112.25.25.25h2.5a.75.75 0 010 1.5h-2.5A1.75 1.75 0 012 13.25V2.75zm10.44 4.5H6.75a.75.75 0 000 1.5h5.69l-1.97 1.97a.75.75 0 101.06 1.06l3.25-3.25a.75.75 0 000-1.06l-3.25-3.25a.75.75 0 10-1.06 1.06l1.97 1.97z"
-								></path>
-							</svg>
-							Sign Out
-						</a>
-					</nav>
-				</div>
-
-				<div class="nav__item--hide nav-item new-item display-sm-none">
-					<div class="icon-holder dropdown-toggler">
-						<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
-							<path
-								fill-rule="evenodd"
-								d="M8 2a.75.75 0 01.75.75v4.5h4.5a.75.75 0 010 1.5h-4.5v4.5a.75.75 0 01-1.5 0v-4.5h-4.5a.75.75 0 010-1.5h4.5v-4.5A.75.75 0 018 2z"
-							></path>
-						</svg>
-						<span class="dropdown-icon"></span>
-					</div>
-					<div class="dropdown">
-						<ul class="dropdown-list">
-							<li>
-								<a href="https://github.com/new">New repository</a>
-							</li>
-							<li>
-								<a href="https://github.com/new/import">Import repository</a>
-							</li>
-							<li>
-								<a href="https://gist.github.com/new">New gist</a>
-							</li>
-							<li>
-								<a href="https://github.com/organizations/new"
-									>New organization</a
+					<div class="navbar__item dropdown-repo">
+						<details class="details-overlay details-reset">
+							<summary class="navbar__link">
+								<svg
+									aria-hidden="true"
+									viewBox="0 0 16 16"
+									version="1.1"
+									data-view-component="true"
+									height="16"
+									width="16"
+									class="icon icon-plus"
 								>
-							</li>
-							<li>
-								<a href="https://github.com/new/project">Import project</a>
-							</li>
-						</ul>
-					</div>
-				</div>
+									<path
+										fill-rule="evenodd"
+										d="M7.75 2a.75.75 0 01.75.75V7h4.25a.75.75 0 110 1.5H8.5v4.25a.75.75 0 11-1.5 0V8.5H2.75a.75.75 0 010-1.5H7V2.75A.75.75 0 017.75 2z"
+									></path>
+								</svg>
+								<span class="dropdown-caret"></span>
+							</summary>
+							<div class="dropdown-menu dropdown-menu-sw" role="menu">
+								<a role="menuitem" class="dropdown-item" href="/new">
+									New repository
+								</a>
 
-				<div class="nav__item--hide nav-item user-dropdown display-sm-none">
-					<div class="icon-holder dropdown-toggler">
-						<img class="profile-image" />
-						<span class="dropdown-icon"></span>
+								<a role="menuitem" class="dropdown-item" href="/new/import">
+									Import repository
+								</a>
+
+								<a
+									role="menuitem"
+									class="dropdown-item"
+									href="https://gist.github.com/"
+								>
+									New gist
+								</a>
+
+								<a
+									role="menuitem"
+									class="dropdown-item"
+									href="/organizations/new"
+								>
+									New organization
+								</a>
+
+								<a role="menuitem" class="dropdown-item" href="/new/project">
+									New project
+								</a>
+							</div>
+						</details>
 					</div>
-					<div class="dropdown">
-						<ul class="dropdown-list">
-							<li>
-								<a class="heading" href="https://github.com/the-fanan"
-									>Signed in as <strong class="username-text"></strong
-								></a>
-							</li>
-							<li class="divider"></li>
-							<li>
-								<div class="status-container">
-									<div class="status-main">
-										<g-emoji
-											alias="computer"
-											fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4bb.png"
-										>
-											<img
-												class="computer"
-												alt="thought_balloon"
-												src="https://github.githubassets.com/images/icons/emoji/unicode/1f4bb.png"
-												width="20"
-												height="20"
-											/>
-										</g-emoji>
-										<span> Building </span>
+
+					<div class="navbar__item dropdown-user">
+						<details
+							class="
+								details-overlay details-reset
+								js-feature-preview-indicator-container
+							"
+						>
+							<summary
+								class="navbar__link"
+								aria-label="View profile and more"
+								aria-haspopup="menu"
+								role="button"
+							>
+								<img
+									id="dropdown-avatar"
+									class="avatar avatar__img"
+									width="20"
+									height="20"
+								/>
+								<span
+									class="feature-preview-indicator js-feature-preview-indicator"
+									style="top: 1px"
+									hidden=""
+								></span>
+								<span class="dropdown-caret"></span>
+							</summary>
+							<div
+								class="dropdown-menu dropdown-menu-sw"
+								style="width: 180px"
+								src="/users/25040059/menu"
+								preload=""
+								role="menu"
+							>
+								<div class="">
+									<a role="menuitem" class="user-profile-link" href="#"
+										>Signed in as <strong class="user-profile-name"></strong
+									></a>
+								</div>
+								<div role="none" class="dropdown-divider"></div>
+
+								<div class="profile__status-container--nav">
+									<div class="profile__status">
+										<div class="profile__status-emoji default-emoji--nav">
+											<svg
+												class="icon icon-smiley"
+												viewBox="0 0 16 16"
+												version="1.1"
+												width="16"
+												height="16"
+												aria-hidden="true"
+											>
+												<path
+													fill-rule="evenodd"
+													d="M1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0zM8 0a8 8 0 100 16A8 8 0 008 0zM5 8a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zM5.32 9.636a.75.75 0 011.038.175l.007.009c.103.118.22.222.35.31.264.178.683.37 1.285.37.602 0 1.02-.192 1.285-.371.13-.088.247-.192.35-.31l.007-.008a.75.75 0 111.222.87l-.614-.431c.614.43.614.431.613.431v.001l-.001.002-.002.003-.005.007-.014.019a1.984 1.984 0 01-.184.213c-.16.166-.338.316-.53.445-.63.418-1.37.638-2.127.629-.946 0-1.652-.308-2.126-.63a3.32 3.32 0 01-.715-.657l-.014-.02-.005-.006-.002-.003v-.002h-.001l.613-.432-.614.43a.75.75 0 01.183-1.044h.001z"
+												></path>
+											</svg>
+										</div>
+										<div class="profile__status-emoji user-emoji--nav"></div>
+										<span class="profile__status-msg user-msg--nav"></span>
 									</div>
 								</div>
-							</li>
-							<li class="divider"></li>
-							<li>
-								<a href="https://github.com/the-fanan">Your profile</a>
-							</li>
-							<li>
-								<a href="https://github.com/the-fanan?tab=repositories"
+
+								<div role="none" class="dropdown-divider"></div>
+
+								<a role="menuitem" class="dropdown-item" href="#"
+									>Your profile</a
+								>
+
+								<a role="menuitem" class="dropdown-item" href="#"
 									>Your repositories</a
 								>
-							</li>
-							<li>
-								<a href="https://github.com/the-fanan?tab=projects"
+
+								<a role="menuitem" class="dropdown-item" href="#"
+									>Your codespaces</a
+								>
+
+								<a role="menuitem" class="dropdown-item" href="#"
+									>Your organizations</a
+								>
+
+								<a role="menuitem" class="dropdown-item" href="#"
 									>Your projects</a
 								>
-							</li>
-							<li>
-								<a href="https://github.com/the-fanan?tab=stars">Your stars</a>
-							</li>
-							<li>
-								<a href="https://gist.github.com/mins">Your gists</a>
-							</li>
-							<li class="divider"></li>
-							<li>
-								<a href="https://github.com/settings/billing">Upgrade</a>
-							</li>
-							<li>
-								<a href="#">Feature preview</a>
-							</li>
-							<li>
-								<a href="https://docs.github.com">Help</a>
-							</li>
-							<li>
-								<a href="https://github.com/settings/profile">Settings</a>
-							</li>
-							<li>
-								<a href="https://github.com/sign-out">Sign out</a>
-							</li>
-						</ul>
+
+								<a role="menuitem" class="dropdown-item" href="#">Your stars</a>
+								<a role="menuitem" class="dropdown-item" href="#">Your gists</a>
+
+								<div role="none" class="dropdown-divider"></div>
+								<a role="menuitem" class="dropdown-item" href="#">Upgrade</a>
+								<a role="menuitem" class="dropdown-item" href="#"
+									>Feature preview</a
+								>
+
+								<a role="menuitem" class="dropdown-item" href="#">Help</a>
+								<a role="menuitem" class="dropdown-item" href="#">Settings</a>
+
+								<div role="none" class="dropdown-divider"></div>
+								<a role="menuitem" class="dropdown-item" href="#"
+									>Market place</a
+								>
+
+								<div role="none" class="dropdown-divider"></div>
+								<a role="menuitem" class="dropdown-item" href="/index.html"
+									>Sign out</a
+								>
+							</div>
+						</details>
 					</div>
 				</div>
 			</nav>
@@ -247,31 +307,61 @@
 				<div class="profile__details">
 					<div class="profile__userDetails">
 						<div class="profile__personalDetails">
-							<img class="profile__img" width="260" height="260" />
+							<a
+								class="profile__user-status"
+								href="#"
+								aria-label="Change your avatar"
+							>
+								<img class="profile__img" width="260" height="260" />
+							</a>
+							<div class="profile__status-container">
+								<div class="profile__status" id="profile__status">
+									<div class="profile__status-emoji default-emoji">
+										<svg
+											class="icon icon-smiley"
+											viewBox="0 0 16 16"
+											version="1.1"
+											width="16"
+											height="16"
+											aria-hidden="true"
+										>
+											<path
+												fill-rule="evenodd"
+												d="M1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0zM8 0a8 8 0 100 16A8 8 0 008 0zM5 8a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zM5.32 9.636a.75.75 0 011.038.175l.007.009c.103.118.22.222.35.31.264.178.683.37 1.285.37.602 0 1.02-.192 1.285-.371.13-.088.247-.192.35-.31l.007-.008a.75.75 0 111.222.87l-.614-.431c.614.43.614.431.613.431v.001l-.001.002-.002.003-.005.007-.014.019a1.984 1.984 0 01-.184.213c-.16.166-.338.316-.53.445-.63.418-1.37.638-2.127.629-.946 0-1.652-.308-2.126-.63a3.32 3.32 0 01-.715-.657l-.014-.02-.005-.006-.002-.003v-.002h-.001l.613-.432-.614.43a.75.75 0 01.183-1.044h.001z"
+											></path>
+										</svg>
+									</div>
+									<div class="profile__status-emoji user-emoji"></div>
+									<span class="profile__status-msg user-msg"></span>
+								</div>
+							</div>
+
 							<h1 class="profile__name">
 								<span class="profile__fullname"></span>
 								<span class="profile__username"></span>
 							</h1>
 						</div>
 
-						<div class="profile__status">
-							<div class="profile__status-emoji smiley">
-								<svg
-									class="icon icon-smiley"
-									viewBox="0 0 16 16"
-									version="1.1"
-									width="16"
-									height="16"
-									aria-hidden="true"
-								>
-									<path
-										fill-rule="evenodd"
-										d="M1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0zM8 0a8 8 0 100 16A8 8 0 008 0zM5 8a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zM5.32 9.636a.75.75 0 011.038.175l.007.009c.103.118.22.222.35.31.264.178.683.37 1.285.37.602 0 1.02-.192 1.285-.371.13-.088.247-.192.35-.31l.007-.008a.75.75 0 111.222.87l-.614-.431c.614.43.614.431.613.431v.001l-.001.002-.002.003-.005.007-.014.019a1.984 1.984 0 01-.184.213c-.16.166-.338.316-.53.445-.63.418-1.37.638-2.127.629-.946 0-1.652-.308-2.126-.63a3.32 3.32 0 01-.715-.657l-.014-.02-.005-.006-.002-.003v-.002h-.001l.613-.432-.614.43a.75.75 0 01.183-1.044h.001z"
-									></path>
-								</svg>
+						<div class="profile__status-container--mobile">
+							<div class="profile__status">
+								<div class="profile__status-emoji default-emoji--mobile">
+									<svg
+										class="icon icon-smiley"
+										viewBox="0 0 16 16"
+										version="1.1"
+										width="16"
+										height="16"
+										aria-hidden="true"
+									>
+										<path
+											fill-rule="evenodd"
+											d="M1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0zM8 0a8 8 0 100 16A8 8 0 008 0zM5 8a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zM5.32 9.636a.75.75 0 011.038.175l.007.009c.103.118.22.222.35.31.264.178.683.37 1.285.37.602 0 1.02-.192 1.285-.371.13-.088.247-.192.35-.31l.007-.008a.75.75 0 111.222.87l-.614-.431c.614.43.614.431.613.431v.001l-.001.002-.002.003-.005.007-.014.019a1.984 1.984 0 01-.184.213c-.16.166-.338.316-.53.445-.63.418-1.37.638-2.127.629-.946 0-1.652-.308-2.126-.63a3.32 3.32 0 01-.715-.657l-.014-.02-.005-.006-.002-.003v-.002h-.001l.613-.432-.614.43a.75.75 0 01.183-1.044h.001z"
+										></path>
+									</svg>
+								</div>
+								<div class="profile__status-emoji user-emoji--mobile"></div>
+								<span class="profile__status-msg user-msg--mobile"></span>
 							</div>
-							<div class="profile__status-emoji user-emoji"></div>
-							<span class="profile__status-msg"></span>
 						</div>
 
 						<div class="profile__otherDetails">
@@ -282,7 +372,10 @@
 				<div class="repo__details">
 					<div class="repo-nav">
 						<nav class="repo-nav__body" aria-label="user profile">
-							<a class="repo-nav__item" onclick="openTab(event, 'Overview')">
+							<a
+								class="repo-nav__item selected"
+								onclick="openTab(event, 'Overview')"
+							>
 								<svg
 									aria-hidden="true"
 									viewBox="0 0 16 16"
@@ -290,7 +383,7 @@
 									data-view-component="true"
 									height="16"
 									width="16"
-									class="octicon octicon-book UnderlineNav-octicon hide"
+									class="icon icon-book"
 								>
 									<path
 										fill-rule="evenodd"
@@ -310,7 +403,7 @@
 									data-view-component="true"
 									height="16"
 									width="16"
-									class="octicon octicon-repo UnderlineNav-octicon hide"
+									class="icon icon-repo"
 								>
 									<path
 										fill-rule="evenodd"
@@ -328,7 +421,7 @@
 									data-view-component="true"
 									height="16"
 									width="16"
-									class="octicon octicon-project UnderlineNav-octicon hide"
+									class="icon icon-project"
 								>
 									<path
 										fill-rule="evenodd"
@@ -345,7 +438,7 @@
 									data-view-component="true"
 									height="16"
 									width="16"
-									class="octicon octicon-package UnderlineNav-octicon hide"
+									class="icon icon-package"
 								>
 									<path
 										fill-rule="evenodd"
@@ -357,7 +450,7 @@
 						</nav>
 					</div>
 					<div id="Overview" class="tabcontent">
-						please click on repositories tab
+						<h2>please click on repositories tab</h2>
 					</div>
 					<div id="Repositories" class="tabcontent">
 						<div class="repo-top">
@@ -441,80 +534,18 @@
 									</a>
 								</div>
 							</div>
-							<ul class="repo__filterList">
-								<li class="repo__filterItem">
-									<div class="repo__filterItem-details">
-										<h3 class="repo__title">
-											<a class="repo__title-link">TodoList</a>
-										</h3>
-										<p class="repo__description">A simple todolist</p>
-										<div class="repo__itemDetails">
-											<span class="repo__lang">
-												<span class="repo__lang-color"> </span>
-												<span class="repo__lang-text"> Javascript</span>
-											</span>
-											<a class="repo__star-count" href="#">
-												<svg
-													class="icon icon-star"
-													viewBox="0 0 16 16"
-													version="1.1"
-													width="16"
-													height="16"
-													aria-hidden="true"
-												>
-													<path
-														fill-rule="evenodd"
-														d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25zm0 2.445L6.615 5.5a.75.75 0 01-.564.41l-3.097.45 2.24 2.184a.75.75 0 01.216.664l-.528 3.084 2.769-1.456a.75.75 0 01.698 0l2.77 1.456-.53-3.084a.75.75 0 01.216-.664l2.24-2.183-3.096-.45a.75.75 0 01-.564-.41L8 2.694v.001z"
-													></path>
-												</svg>
-												1
-											</a>
-											<a class="repo__fork-count" href="#">
-												<svg
-													aria-label="fork"
-													role="img"
-													viewBox="0 0 16 16"
-													version="1.1"
-													data-view-component="true"
-													height="16"
-													width="16"
-													class="icon icon-repo-forked"
-												>
-													<path
-														fill-rule="evenodd"
-														d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"
-													></path>
-												</svg>
-												1
-											</a>
-											Updated
-											<time>2 days</time>
-										</div>
-									</div>
-									<div class="repo__rating">
-										<button class="btn btn-sm">
-											<svg
-												class="icon icon-star"
-												viewBox="0 0 16 16"
-												version="1.1"
-												width="16"
-												height="16"
-												aria-hidden="true"
-											>
-												<path
-													fill-rule="evenodd"
-													d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25zm0 2.445L6.615 5.5a.75.75 0 01-.564.41l-3.097.45 2.24 2.184a.75.75 0 01.216.664l-.528 3.084 2.769-1.456a.75.75 0 01.698 0l2.77 1.456-.53-3.084a.75.75 0 01.216-.664l2.24-2.183-3.096-.45a.75.75 0 01-.564-.41L8 2.694v.001z"
-												></path>
-											</svg>
-											Star
-										</button>
-									</div>
-								</li>
-							</ul>
+							<ul class="repo__filterList"></ul>
 						</div>
 					</div>
-					<div id="Projects" class="tabcontent"></div>
-					<div id="Packages" class="tabcontent"></div>
+					<div id="Projects" class="tabcontent">
+						<h2>
+							Erhh... still working on this tab, please go back to the
+							repositories tab
+						</h2>
+					</div>
+					<div id="Packages" class="tabcontent">
+						<h2>Yeah... go back to the repositories tab</h2>
+					</div>
 				</div>
 			</div>
 		</main>
@@ -526,6 +557,22 @@
 				<a href="#">Status</a>
 				<a href="#">Docs</a>
 			</div>
+			<a href="#">
+				<svg
+					aria-hidden="true"
+					viewBox="0 0 16 16"
+					version="1.1"
+					data-view-component="true"
+					height="24"
+					width="24"
+					class="icon icon-mark-github"
+				>
+					<path
+						fill-rule="evenodd"
+						d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+					></path>
+				</svg>
+			</a>
 			<div class="footer__container">
 				<a href="#">Contact GitHub</a>
 				<a href="#">Pricing</a>
