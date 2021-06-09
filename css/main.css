@@ -36,6 +36,7 @@
 	--color-btn-primary-border: rgba(27, 31, 35, 0.15);
 	--color-btn-primary-shadow: 0 1px 0 rgba(27, 31, 35, 0.1);
 	--color-btn-primary-inset-shadow: inset 0 1px 0 hsla(0, 0%, 100%, 0.03);
+	--color-btn-primary-icon: hsla(0, 0%, 100%, 0.8);
 
 	--color-state-focus-border: #0366d6;
 	--color-state-focus-shadow: 0 0 0 3px rgba(3, 102, 214, 0.3);
@@ -51,8 +52,6 @@
 
 	--color-counter-text: #24292e;
 	--color-counter-bg: rgba(209, 213, 218, 0.5);
-
-	--color-btn-primary-icon: hsla(0, 0%, 100%, 0.8);
 
 	--color-icon-tertiary: #959da5;
 
@@ -86,9 +85,28 @@ a:focus {
 	text-decoration: underline;
 }
 
-/***Search Page ***/
+svg {
+	fill: var(--color-text-white);
+	cursor: pointer;
+}
 
-/* Header */
+svg:hover {
+	fill: var(--color-scale-gray-3);
+}
+
+.open {
+	display: flex !important;
+}
+
+.show {
+	display: block !important;
+}
+
+.hide {
+	display: none !important;
+}
+
+/*------- Search Page --------*/
 
 #search-page .header {
 	text-align: center;
@@ -199,8 +217,6 @@ input:focus {
 }
 
 .btn {
-	/* position: relative;
-	display: inline-block; */
 	padding: 5px 16px;
 	font-size: 14px;
 	font-weight: 500;
@@ -241,7 +257,6 @@ input:focus {
 
 .footer__container {
 	display: flex;
-	/* gap: 2rem; */
 	justify-content: center;
 }
 
@@ -253,7 +268,7 @@ input:focus {
 	color: var(--color-text-link);
 }
 
-/***Profile Page ***/
+/*------- Profile Page --------*/
 
 #profile-page .header {
 	background-color: var(--color-header-bg);
@@ -262,8 +277,6 @@ input:focus {
 .navbar {
 	display: flex;
 	flex-direction: column;
-	/* justify-content: space-between;
-	align-items: center; */
 }
 
 .navbar__container {
@@ -353,15 +366,12 @@ input:focus {
 	display: table-cell;
 	width: 100%;
 	padding: 0 12px 0;
-	/* font-size: inherit;
-	color: inherit;
-	 */
 }
 
 .focused {
 	max-width: 768px;
 	width: 100%;
-	background-color: #fafbfc;
+	background-color: var(--color-btn-bg);
 }
 
 .navbar__input::placeholder {
@@ -430,10 +440,8 @@ input:focus {
 	overflow: hidden;
 	line-height: 1;
 	vertical-align: middle;
-	/* background-color: var(--color-avatar-bg); */
 	border-radius: 6px;
 	flex-shrink: 0;
-	/* box-shadow: 0 0 0 1px var(--color-avatar-border); */
 }
 
 .avatar__img {
@@ -445,13 +453,29 @@ input:focus {
 	height: auto;
 }
 
-svg {
-	fill: var(--color-text-white);
-	cursor: pointer;
+/*** Icons ***/
+
+.icon {
+	display: inline-block;
+	overflow: visible;
+	vertical-align: text-bottom;
 }
 
-svg:hover {
-	fill: var(--color-scale-gray-3);
+.clear-icon {
+	width: 18px;
+	height: 18px;
+	padding: 1px;
+	margin-right: 3px;
+	color: var(--color-text-white);
+	text-align: center;
+	background-color: var(--color-icon-tertiary);
+	border-radius: 6px;
+	margin-top: 4px;
+}
+
+.clear-icon:hover {
+	fill: var(--color-text-white);
+	background-color: var(--color-text-link);
 }
 
 .github-icon {
@@ -462,21 +486,32 @@ svg .github-icon:active {
 	fill: var(--color-scale-gray-3);
 }
 
-.open {
-	display: flex;
-}
-
-.show {
-	display: block;
-}
-
-.hide {
-	display: none;
-}
-
 .three-bars,
 .bell {
 	vertical-align: text-bottom;
+}
+
+.icon-book,
+.icon-repo,
+.icon-project,
+.icon-package {
+	display: none;
+}
+
+.icon-mark-github,
+.icon-star,
+.icon-repo-forked {
+	fill: var(--color-text-tertiary);
+}
+
+.icon-star,
+.icon-repo-forked {
+	margin-right: 0.4rem;
+}
+
+.icon-star:hover,
+.icon-repo-forked:hover {
+	fill: var(--color-text-tertiary);
 }
 
 .notifications__link {
@@ -561,10 +596,6 @@ svg .github-icon:active {
 .profile__status-emoji .g-emoji:hover {
 	fill: var(--color-text-link);
 }
-/* 
-.smiley .user-emoji {
-	display: none;
-} */
 
 .profile__status-msg {
 	color: var(--color-text-secondary);
@@ -581,7 +612,7 @@ svg .github-icon:active {
 	font-size: 1.6rem;
 }
 
-/* ------ Repo details ----------- */
+/*** Repo details ***/
 .repo__details {
 	padding: 0 1.6rem;
 }
@@ -740,30 +771,6 @@ svg .github-icon:active {
 	color: var(--color-text-link);
 }
 
-.icon {
-	display: inline-block;
-	overflow: visible;
-	vertical-align: text-bottom;
-	/* fill: currentColor; */
-}
-
-.clear-icon {
-	width: 18px;
-	height: 18px;
-	padding: 1px;
-	margin-right: 3px;
-	color: var(--color-text-white);
-	text-align: center;
-	background-color: var(--color-icon-tertiary);
-	border-radius: 6px;
-	margin-top: 4px;
-}
-
-.clear-icon:hover {
-	fill: var(--color-text-white);
-	background-color: var(--color-text-link);
-}
-
 .repo__filterItem {
 	padding: 2.4rem 0;
 	border-color: var(--color-border-secondary);
@@ -819,29 +826,6 @@ svg .github-icon:active {
 	justify-content: space-around;
 }
 
-.icon-book,
-.icon-repo,
-.icon-project,
-.icon-package {
-	display: none;
-}
-
-.icon-mark-github,
-.icon-star,
-.icon-repo-forked {
-	fill: var(--color-text-tertiary);
-}
-
-.icon-star,
-.icon-repo-forked {
-	margin-right: 0.4rem;
-}
-
-.icon-star:hover,
-.icon-repo-forked:hover {
-	fill: var(--color-text-tertiary);
-}
-
 .repo__star-count,
 .repo__fork-count {
 	cursor: pointer;
@@ -865,6 +849,17 @@ svg .github-icon:active {
 	padding: 4rem 1.6rem;
 	font-size: 1.2rem;
 	border-top: 1px solid var(--color-border-primary);
+	opacity: 0.25;
+	transition: 0.5s;
+	/* for other browsers */
+	-o-transition: 0.5s;
+	-ms-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-webkit-transition: 0.5s;
+}
+
+#profile-page .footer:hover {
+	opacity: 0.75;
 }
 
 #profile-page .footer a {
@@ -876,19 +871,6 @@ svg .github-icon:active {
 	gap: 2rem;
 	justify-content: center;
 	margin-bottom: 0.8rem;
-}
-
-#profile-page .footer {
-	opacity: 0.25;
-	transition: 0.5s;
-	/* for other browsers */
-	-o-transition: 0.5s;
-	-ms-transition: 0.5s;
-	-moz-transition: 0.5s;
-	-webkit-transition: 0.5s;
-}
-#profile-page .footer:hover {
-	opacity: 0.75;
 }
 
 details > summary {
@@ -908,6 +890,10 @@ details > summary::-webkit-details-marker {
 
 .profile__status-container {
 	display: none;
+}
+
+.profile__status-container--nav {
+	padding: 0 1.6rem;
 }
 
 .footer a svg {
@@ -1023,22 +1009,18 @@ details > summary::-webkit-details-marker {
 	text-decoration: none;
 }
 
-.profile__status-container--nav {
-	padding: 0 1.6rem;
-}
-
-/* MEDIA QUERIES */
+/* ----- MEDIA QUERIES ------ */
 
 @media screen and (min-width: 768px) {
+	#profile-page .header {
+		padding: 1.6rem 2.4rem;
+	}
+
 	#profile-page .main {
 		position: relative;
 		display: flex;
 		flex-direction: column;
 		padding: 0 1.6rem;
-	}
-
-	#profile-page .header {
-		padding: 1.6rem 2.4rem;
 	}
 
 	.profile__cover {
@@ -1062,13 +1044,6 @@ details > summary::-webkit-details-marker {
 		position: relative;
 		z-index: 4;
 		flex-basis: 25%;
-		padding: 0 0.8rem;
-	}
-
-	.repo__details {
-		position: relative;
-		z-index: 2;
-		flex-basis: 75%;
 		padding: 0 0.8rem;
 	}
 
@@ -1123,6 +1098,13 @@ details > summary::-webkit-details-marker {
 		margin-right: 0;
 	}
 
+	.repo__details {
+		position: relative;
+		z-index: 2;
+		flex-basis: 75%;
+		padding: 0 0.8rem;
+	}
+
 	.repo-top {
 		display: flex;
 		align-items: flex-start;
@@ -1156,7 +1138,7 @@ details > summary::-webkit-details-marker {
 		margin: 1rem 0;
 	}
 
-	/* NAV*	 */
+	/* NAV	 */
 	.dropdown-repo,
 	.dropdown-user {
 		display: block;
@@ -1174,11 +1156,8 @@ details > summary::-webkit-details-marker {
 		display: grid;
 		align-items: center;
 		width: 100%;
-
 		grid-template-areas: 'icon nav not repo user';
 		grid-template-columns: auto 1fr auto auto auto;
-		/* grid-template-columns: repeat(5, auto); */
-		/* grid-template-rows: auto auto; */
 	}
 
 	.logo {
@@ -1210,6 +1189,7 @@ details > summary::-webkit-details-marker {
 		flex-direction: row;
 		gap: 1.5rem;
 		align-items: center;
+		margin-top: 0;
 	}
 
 	.navbar__base-link {
@@ -1239,10 +1219,6 @@ details > summary::-webkit-details-marker {
 		display: none;
 	}
 
-	.search-area {
-		margin-top: 0;
-	}
-
 	.navbar__search {
 		margin-bottom: 0;
 	}
@@ -1253,12 +1229,12 @@ details > summary::-webkit-details-marker {
 }
 
 @media screen and (min-width: 1012px) {
-	#profile-page .main {
-		padding: 0 2.4rem;
-	}
-
 	#profile-page .header {
 		padding: 1.6rem 3.2rem;
+	}
+
+	#profile-page .main {
+		padding: 0 2.4rem;
 	}
 
 	.repo-top__search {

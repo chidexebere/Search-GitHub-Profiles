@@ -10,6 +10,7 @@ const errorMessage = document.querySelector('.error__message');
 const errorButton = document.querySelector('.error__button');
 const username = document.querySelector('.form__input');
 
+// Handles search using entered username
 const handleSearch = (e) => {
 	e.preventDefault();
 	if (!username.value) {
@@ -21,6 +22,12 @@ const handleSearch = (e) => {
 
 form.addEventListener('submit', handleSearch);
 
+/**
+ * Gets user data from GitHub's GraphQL API
+ *
+ * @param {String} username
+ *
+ */
 const getUserDataPofile = async (username) => {
 	const QUERY = {
 		query: `

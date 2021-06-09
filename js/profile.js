@@ -5,6 +5,9 @@ const searchInput = document.querySelector('.navbar__input');
 const keySlashIcon = document.querySelector('.key-slash');
 const searchAreaNav = document.querySelector('.search-area');
 
+/**
+ * Adds and remove focus on search input
+ */
 const addSearchFocus = () => {
 	keySlashIcon.style.display = 'none';
 	searchWrapper.classList.add('focused');
@@ -17,10 +20,15 @@ const removeSearchFocus = () => {
 	keySlashIcon.style.display = 'block';
 };
 
+// Toggles navigation in mobile view
 const toggleNav = () => {
 	searchAreaNav.classList.toggle('open');
 };
 
+/**
+ * Handles tab section
+ *
+ */
 const openTab = (evt, tab) => {
 	let i, tabcontent, tablinks;
 	tabcontent = document.getElementsByClassName('tabcontent');
@@ -35,7 +43,13 @@ const openTab = (evt, tab) => {
 	evt.currentTarget.className += ' selected';
 };
 
-// Format date
+/**
+ * Format timestamps from API to a readable date format
+ *
+ * @param {String} date
+ *
+ * @return {String} formated date
+ */
 const units = [
 	{ name: ' second', value: 1000, max: 50, single: 'a second' },
 	{ name: ' minute', value: 60000, max: 50, single: 'a minute' },
@@ -71,6 +85,7 @@ const format = (date) => {
  * Generates an SVG element with specified path d
  *
  * @param {String} pathString
+ * @param {String} ClassName
  * @param {Object} options
  *
  * @return {Element}
@@ -91,6 +106,9 @@ const generateSvgWithPath = (pathString, className, options = {}) => {
 	return svg;
 };
 
+/**
+ * Renders each repo on the repository tab
+ */
 const renderRepository = (repository) => {
 	const title = document.createElement('h3');
 	title.classList.add('repo__title');
@@ -198,6 +216,9 @@ const renderRepository = (repository) => {
 	return filteredItem;
 };
 
+/**
+ * Populates the profile page
+ */
 const populateUserProfilePage = (data) => {
 	const avatarImage = document.querySelector('.avatar');
 	const dropdownAvatar = document.querySelector('#dropdown-avatar');
