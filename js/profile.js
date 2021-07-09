@@ -39,8 +39,13 @@ const openTab = (evt, tab) => {
 	for (i = 0; i < tablinks.length; i++) {
 		tablinks[i].className = tablinks[i].className.replace(' selected', '');
 	}
+
 	document.getElementById(tab).style.display = 'block';
-	evt.currentTarget.className += ' selected';
+	const selectedTabId = evt.currentTarget.id;
+	const selectedTabs = document.querySelectorAll(`#${selectedTabId}`);
+	selectedTabs.forEach((selectedTab) => {
+		selectedTab.classList.add('selected');
+	});
 };
 
 /**
@@ -223,7 +228,9 @@ const populateUserProfilePage = (data) => {
 	const avatarImage = document.querySelector('.avatar');
 	const dropdownAvatar = document.querySelector('#dropdown-avatar');
 	const profileImage = document.querySelector('.profile__img');
+	const avatar = document.querySelector('#repo-img');
 
+	// Displays avatar
 	const displayAvatar = (AVATAR) => {
 		AVATAR.setAttribute('src', data.avatarUrl);
 		AVATAR.setAttribute('alt', `@${data.login}`);
@@ -238,11 +245,19 @@ const populateUserProfilePage = (data) => {
 	// Displays profile picture in tablet and desktop view
 	displayAvatar(profileImage);
 
+	// Displays avatar on repo header
+	displayAvatar(avatar);
+
 	const userProfileName = document.querySelector('.user-profile-name');
 	userProfileName.textContent = data.login;
 
 	const userName = document.querySelector('.username');
 	userName.textContent = data.login;
+
+	const repoUserName = document.querySelector('.repo__username');
+	const strong = document.createElement('strong');
+	strong.textContent = data.login;
+	repoUserName.append(strong);
 
 	const userFullName = document.querySelector('.profile__fullname');
 	userFullName.textContent = data.name;
@@ -270,6 +285,24 @@ const populateUserProfilePage = (data) => {
 		}
 	};
 
+	// Handle display of User Sticky Bar
+	const handleScroll = () => {
+		const repoUserStickyBar = document.querySelector('.repo__user-stickyBar');
+		const { bottom } = profileImage.getBoundingClientRect();
+		if (bottom < 0) {
+			repoUserStickyBar.style.opacity = 1;
+		} else {
+			repoUserStickyBar.style.opacity = 0;
+		}
+	};
+
+	// Handle debounce for scroll event
+	let debounce;
+	window.addEventListener('scroll', () => {
+		clearTimeout(debounce);
+		debounce = setTimeout(handleScroll, 10);
+	});
+
 	// Displays profile status in mobile view
 	displayProfileStatus(userEmojiM, defaultEmojiM, statusMsgM);
 	// Displays profile status in top nav in tablet and desktop view
@@ -292,8 +325,10 @@ const populateUserProfilePage = (data) => {
 	const userBio = document.querySelector('.profile__user-bio');
 	userBio.textContent = data.bio;
 
-	const counter = document.querySelector('.counter');
-	counter.textContent = data.repositories.totalCount;
+	const counters = document.querySelectorAll('.counter');
+	counters.forEach((counter) => {
+		counter.textContent = data.repositories.totalCount;
+	});
 
 	const filteredRepo = document.querySelector('.repo__filterNumber');
 	filteredRepo.textContent = data.repositories.edges.length;
