@@ -678,7 +678,7 @@ svg .github-icon:active {
 	display: none;
 }
 
-#Overview {
+#Repositories {
 	display: block;
 }
 
@@ -1126,14 +1126,14 @@ details > summary::-webkit-details-marker {
 		border-radius: 2em;
 		box-shadow: var(--color-shadow-small);
 		display: flex;
-		justify-content: space-between;
+		justify-content: start;
 		align-items: center;
 		line-height: 1;
 		padding: 1rem;
 	}
 
 	.profile__status-container .profile__status:hover {
-		width: 10rem;
+		width: 100%;
 	}
 
 	.profile__status-container .user-msg {
